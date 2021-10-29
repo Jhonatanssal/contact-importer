@@ -8,17 +8,18 @@
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="form-group">
+          <%= f.label :username %><br />
+          <%= f.email_field :username,
+                            type: "text",
+                            class: "form-control",
+                            novalidate: "novalidate" %>
+        </div>
+
+        <div class="form-group">
           <%= f.label :email %><br />
           <%= f.email_field :email,
                             autofocus: true,
                             autocomplete: "email",
-                            class: "form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :username %><br />
-          <%= f.email_field :username,
-                            autofocus: true,
                             class: "form-control" %>
         </div>
 
