@@ -53,7 +53,7 @@ RSpec.describe Contact, type: :model do
   describe "instance methods" do
     subject { create(:contact, credit_card: "6771-8918-2889-3970") }
 
-    it { expect(subject.card_numbers).to eql("3970") }
+    it { expect(subject.card_numbers[-4..]).to eql("3970") }
     it { expect(subject.credit_card).not_to eq("6771-8918-2889-3970") }
   end
 end
