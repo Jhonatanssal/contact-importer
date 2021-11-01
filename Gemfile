@@ -79,3 +79,6 @@ gem "aasm", "~> 5.2"
 
 # S3
 gem "aws-sdk-s3", require: false
+
+# SimpleForm
+gem "simple_form", "~> 5.1"

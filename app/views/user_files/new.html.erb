@@ -1,0 +1,14 @@
+<div class="container pt-4 d-flex justify-content-center">
+  <div class="card text-center w-50 shadow p-4">
+    <div class="card-body">
+      <h3 class="card-title">Upload File</h3>
+    </div>
+    <hr>
+    <div class="card-body">
+      <%= simple_form_for [current_user, @user_file], input_html: { multipart: true } do |f| %>
+        <%= f.file_field :file %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+</div>

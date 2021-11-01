@@ -10,6 +10,22 @@
           <p class="card-text">Hello, this is your profile.</p>
         </div>
       </div>
+
+      <div class="card my-4">
+        <div class="card-body text-center">
+          <h5 class="card-title">Imported Files</h5>
+          <p>This is the list of your uploaded files:</p>
+          <div class="files">
+            <ul class="list-group">
+              <% @files.each do |file| %>
+                <li class="list-group-item">
+                  <%= link_to file.name.split('/').last, user_user_file_path(current_user, file) %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Contacts -->
@@ -18,39 +34,7 @@
         <div class="card-body text-center">
           <h3 class="card-title">Contacts</h3>
           <p class="card-text">This is the list of contacts you have uploaded via CSV files to your profile.</p>
-
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Date of Birth</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Address</th>
-                <th scope="col">Email</th>
-                <th scope="col">Credit Card</th>
-                <th scope="col">Franchise</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @contacts.each do|c| %>
-                <tr>
-                  <th scope="row"><%= c.id %></th>
-                  <td>
-                    <%= link_to c.name,
-                                user_contact_path(user_id: current_user.id, id: c.id),
-                                class: "text-decoration-none text-dark" %>
-                  </td>
-                  <td><%= c.date_of_birth %></td>
-                  <td><%= c.phone %></td>
-                  <td><%= c.address %></td>
-                  <td><%= c.email %></td>
-                  <td><%= c.card_numbers %></td>
-                  <td><%= c.franchise %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+          <%= render partial: "contacts/contacts_table" %>
         </div>
       </div>
 

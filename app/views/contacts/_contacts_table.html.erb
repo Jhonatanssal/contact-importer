@@ -1,0 +1,32 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Date of Birth</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Address</th>
+      <th scope="col">Email</th>
+      <th scope="col">Credit Card</th>
+      <th scope="col">Franchise</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @contacts.each do|c| %>
+      <tr>
+        <th scope="row"><%= c.id %></th>
+        <td>
+          <%= link_to c.name,
+                      user_contact_path(user_id: current_user.id, id: c.id),
+                      class: "text-decoration-none text-dark" %>
+        </td>
+        <td><%= c.date_of_birth %></td>
+        <td><%= c.phone %></td>
+        <td><%= c.address %></td>
+        <td><%= c.email %></td>
+        <td><%= c.card_numbers %></td>
+        <td><%= c.franchise %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

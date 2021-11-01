@@ -28,7 +28,7 @@
                               "aria-current": "page" %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Import Contacts</a>
+                  <%= link_to "Import Contacts", new_user_user_file_path(current_user.id), class: "nav-link" %>
                 </li>
               <% end %>
             </ul>
