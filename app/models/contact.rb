@@ -24,7 +24,7 @@ class Contact < ApplicationRecord
   before_create :encrypt_credit_card
 
   def card_numbers
-    Encryption::EncryptionService.decrypt(credit_card)[-4..]
+    ("*" * 10) + Encryption::EncryptionService.decrypt(credit_card)[-4..]
   end
 
   private
