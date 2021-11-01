@@ -2,6 +2,7 @@
 
 class Contact < ApplicationRecord
   belongs_to :user
+  belongs_to :user_file
 
   validates :name, presence: true
   validates :name, format: { with: /\A[a-zA-Z0-9\-]+\z/, message: "must be alphanumeric or with '-'" }
@@ -17,6 +18,7 @@ class Contact < ApplicationRecord
   validates :email, uniqueness: { scope: :user_id }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :user_id, presence: true
+  validates :user_file_id, presence: true
 
   validate :date_format
   validate :card_validation

@@ -73,3 +73,6 @@ gem "faker", "~> 2.19"
 
 # Populate Database
 gem "populator", "~> 1.0"
+
+# StateMachine
+gem "aasm", "~> 5.2"

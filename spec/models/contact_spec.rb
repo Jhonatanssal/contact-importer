@@ -5,6 +5,7 @@ require "rails_helper"
 RSpec.describe Contact, type: :model do
   describe "associations" do
     it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:user_file) }
   end
 
   describe "validations" do
@@ -15,6 +16,7 @@ RSpec.describe Contact, type: :model do
       it { is_expected.to validate_presence_of(:credit_card) }
       it { is_expected.to validate_presence_of(:address) }
       it { is_expected.to validate_presence_of(:user_id) }
+      it { is_expected.to validate_presence_of(:user_file_id) }
     end
 
     describe "uniqueness" do

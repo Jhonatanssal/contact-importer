@@ -9,6 +9,7 @@ FactoryBot.define do
     phone { "(+57) 333 444 55 66" }
     credit_card { Faker::Finance.credit_card(:mastercard) }
     franchise { "maestro" }
+    user_file { create(:user_file, user: user) }
     user
 
     trait :mastercard do
