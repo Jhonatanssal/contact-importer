@@ -34,10 +34,13 @@
             </thead>
             <tbody>
               <% @contacts.each do|c| %>
-                <!--TODO: Add Link to Contact Show page -->
                 <tr>
                   <th scope="row"><%= c.id %></th>
-                  <td><%= c.name %></td>
+                  <td>
+                    <%= link_to c.name,
+                                user_contact_path(user_id: current_user.id, id: c.id),
+                                class: "text-decoration-none text-dark" %>
+                  </td>
                   <td><%= c.date_of_birth %></td>
                   <td><%= c.phone %></td>
                   <td><%= c.address %></td>
