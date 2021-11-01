@@ -6,6 +6,7 @@ AllCops:
     - 'bin/setup'
     - 'config/environments/**'
     - 'config/initializers/**'
+    - 'db/migrate/**'
     - 'db/schema.rb'
 
 Style/Documentation:

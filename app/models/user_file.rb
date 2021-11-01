@@ -6,6 +6,8 @@ class UserFile < ApplicationRecord
   belongs_to :user
   has_many :contacts
 
+  has_one_attached :csv_file
+
   validates :user_id, presence: true
 
   aasm do
@@ -25,5 +27,11 @@ class UserFile < ApplicationRecord
     event :finish do
       transitions from: :processing, to: :terminated
     end
+  end
+
+  def csv_file_url
+    return unless resume.attached?
+
+    resume.blob.service_url
   end
 end
