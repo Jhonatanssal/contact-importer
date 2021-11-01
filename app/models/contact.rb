@@ -13,7 +13,6 @@ class Contact < ApplicationRecord
   }
   validates :address, presence: true
   validates :credit_card, presence: true
-  validates :franchise, presence: true
   validates :email, presence: true
   validates :email, uniqueness: { scope: :user_id }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -21,6 +20,12 @@ class Contact < ApplicationRecord
 
   validate :date_format
   validate :card_validation
+
+  before_create :encrypt_credit_card
+
+  def card_numbers
+    Encryption::EncryptionService.decrypt(credit_card)[-4..]
+  end
 
   private
 
@@ -59,5 +64,9 @@ class Contact < ApplicationRecord
 
   def add_franchise(detector)
     self.franchise = detector.brand
+  end
+
+  def encrypt_credit_card
+    self.credit_card = Encryption::EncryptionService.encrypt(credit_card)
   end
 end
