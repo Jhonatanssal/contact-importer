@@ -1,0 +1,63 @@
+<div class="container pt-4">
+  <div class="row">
+    <!-- Profile -->
+    <div class="col-4">
+      <div class="card">
+        <img src="https://via.placeholder.com/700/000000/FFFFFF/?Text=ProfilePic" class="card-img-top" alt="Profile Img">
+        <div class="card-body">
+          <h5 class="card-title"><%= @user.username %></h5>
+          <h6 class="card-title"><%= @user.email %></h6>
+          <p class="card-text">Hello, this is your profile.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contacts -->
+    <div class="col">
+      <div class="card">
+        <div class="card-body text-center">
+          <h3 class="card-title">Contacts</h3>
+          <p class="card-text">This is the list of contacts you have uploaded via CSV files to your profile.</p>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Date of Birth</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+                <th scope="col">Email</th>
+                <th scope="col">Credit Card</th>
+                <th scope="col">Franchise</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @contacts.each do|c| %>
+                <!--TODO: Add Link to Contact Show page -->
+                <tr>
+                  <th scope="row"><%= c.id %></th>
+                  <td><%= c.name %></td>
+                  <td><%= c.date_of_birth %></td>
+                  <td><%= c.phone %></td>
+                  <td><%= c.address %></td>
+                  <td><%= c.email %></td>
+                  <td><%= c.card_numbers %></td>
+                  <td><%= c.franchise %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card my-4">
+        <div class="card-body text-center">
+          <h5 class="card-title">Import more contacts.</h5>
+          <!-- TODO: Form to upload CSV -->
+          <p>Form to upload new CSV with contacts list.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
