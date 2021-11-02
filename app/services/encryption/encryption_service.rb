@@ -3,9 +3,11 @@
 module Encryption
   class EncryptionService
     KEY = ActiveSupport::KeyGenerator.new(
-      Rails.application.credentials.secret_key_base
+      # Rails.application.credentials.secret_key_base
+      ENV.fetch("SECRET_KEY_BASE")
     ).generate_key(
-      Rails.application.credentials.encryption_service_salt,
+      # Rails.application.credentials.encryption_service_salt,
+      ENV.fetch("ENCRYPTION_SERVICE_SALT"),
       ActiveSupport::MessageEncryptor.key_len
     ).freeze
 
