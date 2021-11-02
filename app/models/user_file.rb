@@ -5,8 +5,11 @@ class UserFile < ApplicationRecord
 
   belongs_to :user
   has_many :contacts
+  has_many :rejected_contacts
 
   has_one_attached :csv_file
+
+  attr_reader :contact_name, :email, :phone, :address, :date_of_birth, :credit_card, :franchise
 
   validates :user_id, presence: true
 
