@@ -14,7 +14,6 @@ RSpec.describe Contact, type: :model do
       it { is_expected.to validate_presence_of(:email) }
       it { is_expected.to validate_presence_of(:date_of_birth) }
       it { is_expected.to validate_presence_of(:credit_card) }
-      it { is_expected.to validate_presence_of(:franchise) }
       it { is_expected.to validate_presence_of(:address) }
       it { is_expected.to validate_presence_of(:user_id) }
       it { is_expected.to validate_presence_of(:user_file_id) }
@@ -49,11 +48,6 @@ RSpec.describe Contact, type: :model do
           contact.date_of_birth = "12345678910111"
           expect(contact).not_to be_valid
         end
-
-        it "has invalid franchise" do
-          contact.franchise = "visa"
-          expect(contact).not_to be_valid
-        end
       end
     end
   end
@@ -63,5 +57,6 @@ RSpec.describe Contact, type: :model do
 
     it { expect(subject.card_numbers[-4..]).to eql("3970") }
     it { expect(subject.credit_card).not_to eq("6771-8918-2889-3970") }
+    it { expect(subject.franchise).to eq("maestro") }
   end
 end

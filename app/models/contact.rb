@@ -14,7 +14,6 @@ class Contact < ApplicationRecord
   }
   validates :address, presence: true
   validates :credit_card, presence: true
-  validates :franchise, presence: true
   validates :email, presence: true
   validates :email, uniqueness: { scope: :user_id }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -24,6 +23,7 @@ class Contact < ApplicationRecord
   validate :date_format
   validate :card_validation
 
+  before_create :set_franchise
   before_create :encrypt_credit_card
 
   def card_numbers
@@ -66,16 +66,8 @@ class Contact < ApplicationRecord
     errors.add(:credit_card, "please enter a valid card number.")
   end
 
-  def franchise_validation(detector)
-    if detector.brand == "maestro"
-      add_franchise_error unless franchise == "mastercard"
-    else
-      add_franchise_error unless franchise == detector.brand
-    end
-  end
-
-  def add_franchise_error
-    errors.add(:franchise, "please enter check franchise.")
+  def set_franchise
+    self.franchise = detector.brand.to_s
   end
 
   def encrypt_credit_card

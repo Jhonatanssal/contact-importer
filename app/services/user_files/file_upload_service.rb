@@ -4,7 +4,7 @@
 
 module UserFiles
   class FileUploadService
-    def initialize(columns, file, user_id, user_file)
+    def initialize(columns:, file:, user_id:, user_file:)
       @file = file
       @user_id = user_id
       @user_file = user_file
@@ -12,15 +12,16 @@ module UserFiles
     end
 
     def call
-      iterate_array
+      process_content
     end
 
     private
 
-    def iterate_array
+    def process_content
       convert_hash_to_array.each do |row|
         create_contact(row)
       end
+      @user_file.finish!
     end
 
     def convert_hash_to_array
@@ -28,15 +29,17 @@ module UserFiles
     end
 
     def create_contact(row)
-      contact = Contact.create(name: row[@columns[:contact_name].to_i],
-                               date_of_birth: row[@columns[:date_of_birth].to_i],
-                               email: row[@columns[:email].to_i],
-                               address: row[@columns[:address].to_i],
-                               phone: row[@columns[:phone].to_i],
-                               credit_card: row[@columns[:credit_card].to_i],
-                               franchise: row[@columns[:franchise].to_i],
-                               user_id: @user_id,
-                               user_file_id: @user_file.id)
+      contact = Contact.create(
+        name: row[@columns[:contact_name].to_i],
+        date_of_birth: row[@columns[:date_of_birth].to_i],
+        email: row[@columns[:email].to_i],
+        address: row[@columns[:address].to_i],
+        phone: row[@columns[:phone].to_i],
+        credit_card: row[@columns[:credit_card].to_i],
+        franchise: row[@columns[:franchise].to_i],
+        user_id: @user_id,
+        user_file_id: @user_file.id
+      )
 
       contact_report(contact) unless contact.persisted?
     end
@@ -49,8 +52,6 @@ module UserFiles
         user_id: contact.user_id,
         reasons: errors_refactor(contact.errors)
       )
-
-      @user_file.fail! unless @user_file.failed?
     end
 
     def errors_refactor(errors)
