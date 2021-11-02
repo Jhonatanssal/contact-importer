@@ -38,7 +38,7 @@ module UserFiles
                                user_id: @user_id,
                                user_file_id: @user_file.id)
 
-      contact_report(contact) unless contact.save
+      contact_report(contact) unless contact.persisted?
     end
 
     def contact_report(contact)
