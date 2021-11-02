@@ -8,6 +8,7 @@
       <div class="card-body">
         <p>URL: <a href="<%= @file.url %>"><%= @file.name.split('/').last %></a></p>
         <p>Status: <%= @file.aasm_state.capitalize %></a></p>
+        <p><%= link_to "Download", @file.download_url %> </p>
       </div>
     </div>
 

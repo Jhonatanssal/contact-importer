@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe UserFiles::FileUploadService, type: :job do
+RSpec.describe UserFiles::FileUploadService, type: :service do
   describe "#call" do
     let(:user) { create(:user) }
     let(:user_file) { create(:user_file) }
@@ -32,16 +32,23 @@ RSpec.describe UserFiles::FileUploadService, type: :job do
     end
 
     describe "contacts creation" do
-      subject { described_class.new(columns, books, user.id, user_file.id) }
+      subject { described_class.new(columns: columns, file: books, user_id: user.id, user_file: user_file).call }
 
-      it { expect { subject.call }.to change(Contact, :count).by(1) }
+      it "creates" do
+        user_file.process!
+        expect { subject }.to change(Contact, :count).by(1)
+      end
     end
 
     describe "rejected contacts creation" do
-      subject { described_class.new(columns, books, user.id, user_file.id) }
-      let(:contact) { Contact.last }
+      subject { described_class.new(columns: columns, file: books, user_id: user.id, user_file: user_file).call }
+      let(:contact) { create(:contact, user_id: user.id, user_file_id: user_file.id) }
 
-      it { expect { subject.call }.to change(RejectedContact, :count).by(1) }
+      it do
+        user_file.process!
+        books[0][:email] = contact.email
+        expect { subject }.to change(RejectedContact, :count).by(1)
+      end
     end
   end
 end

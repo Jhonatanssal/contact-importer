@@ -3,7 +3,12 @@
 class FilesUploaderJob < ApplicationJob
   queue_as :default
 
-  def perform(columns, file, user_id, file_id)
-    UserFiles::FileUploadService.new(columns, file, user_id, file_id).call
+  def perform(columns, file, user_id, user_file)
+    UserFiles::FileUploadService.new(
+      columns: columns,
+      file: file,
+      user_id: user_id,
+      user_file: user_file
+    ).call
   end
 end

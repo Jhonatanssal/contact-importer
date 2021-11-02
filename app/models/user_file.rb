@@ -16,15 +16,10 @@ class UserFile < ApplicationRecord
   aasm do
     state :on_hold, initial: true
     state :processing
-    state :failed
     state :terminated
 
     event :process do
       transitions from: :on_hold, to: :processing
-    end
-
-    event :fail do
-      transitions from: :processing, to: :failed
     end
 
     event :finish do
@@ -32,9 +27,14 @@ class UserFile < ApplicationRecord
     end
   end
 
-  def csv_file_url
-    return unless resume.attached?
-
-    resume.blob.service_url
+  def download_url
+    presigner = Aws::S3::Presigner.new
+    presigner.presigned_url(
+      :get_object,
+      bucket: Rails.application.credentials.aws[:bucket],
+      key: name,
+      expires_in: 7.days.to_i,
+      response_content_disposition: "attachment; filename=\"#{name.split('/').last}\""
+    ).to_s
   end
 end
