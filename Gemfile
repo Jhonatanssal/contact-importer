@@ -82,3 +82,6 @@ gem "aws-sdk-s3", require: false
 
 # SimpleForm
 gem "simple_form", "~> 5.1"
+
+# Background Jobs
+gem "sidekiq", "~> 6.2", ">= 6.2.2"

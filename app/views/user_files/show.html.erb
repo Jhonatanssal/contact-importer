@@ -17,5 +17,32 @@
       <hr>
       <%= render partial: "contacts/contacts_table" %>
     </div>
+
+    <div class="card text-center shadow mt-3 p-3">
+      <div class="card-body">
+        <h3 class="card-title">Rejected Contacts</h3>
+      </div>
+      <hr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Reasons</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @rejected_contacts.each do|c| %>
+            <tr>
+              <th scope="row"><%= c.id %></th>
+              <td><%= c.contact_name %></td>
+              <td><%= c.contact_email %></td>
+              <td><%= c.reasons %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
