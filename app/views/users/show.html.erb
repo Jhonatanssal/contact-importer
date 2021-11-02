@@ -1,0 +1,42 @@
+<div class="container pt-4">
+  <div class="row">
+    <!-- Profile -->
+    <div class="col-4">
+      <div class="card">
+        <img src="https://via.placeholder.com/700/000000/FFFFFF/?Text=ProfilePic" class="card-img-top" alt="Profile Img">
+        <div class="card-body">
+          <h5 class="card-title"><%= @user.username %></h5>
+          <h6 class="card-title"><%= @user.email %></h6>
+          <p class="card-text">Hello, this is your profile.</p>
+        </div>
+      </div>
+
+      <div class="card my-4">
+        <div class="card-body text-center">
+          <h5 class="card-title">Imported Files</h5>
+          <p>This is the list of your uploaded files:</p>
+          <div class="files">
+            <ul class="list-group">
+              <% @files.each do |file| %>
+                <li class="list-group-item">
+                  <%= link_to file.name.split('/').last, user_user_file_path(current_user, file) %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contacts -->
+    <div class="col">
+      <div class="card">
+        <div class="card-body text-center">
+          <h3 class="card-title">Contacts</h3>
+          <p class="card-text">This is the list of contacts you have uploaded via CSV files to your profile.</p>
+          <%= render partial: "contacts/contacts_table" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

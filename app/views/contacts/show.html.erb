@@ -1,0 +1,38 @@
+<div class="container pt-4 d-flex justify-content-center">
+  <div class="card text-center w-50 shadow p-4">
+    <div class="card-body">
+      <h3 class="card-title"><%= @contact.name %></h3>
+    </div>
+    <hr>
+    <div class="card-body">
+      <table class="w-100">
+        <thead>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Email:</b></td>
+            <td><%= @contact.email %></td>
+          </tr>
+          <tr>
+            <td><b>Phone:</b></td>
+            <td><%= @contact.phone %></td>
+          </tr>
+          <tr>
+            <td><b>Address:</b></td>
+            <td><%= @contact.address %></td>
+          </tr>
+          <tr>
+            <td><b>Credit Card:</b></td>
+            <td><%= @contact.card_numbers %></td>
+          </tr>
+          <tr>
+            <td><b>Franchise:</b></td>
+            <td><%= @contact.franchise.capitalize %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

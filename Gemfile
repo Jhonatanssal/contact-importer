@@ -59,6 +59,12 @@ group :test do
   gem "simplecov"
 end
 
+# Authentication
+gem "devise"
+
+# CreditCard Validation
+gem "credit_card_validations", "~> 4.1"
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -67,3 +73,15 @@ gem "faker", "~> 2.19"
 
 # Populate Database
 gem "populator", "~> 1.0"
+
+# StateMachine
+gem "aasm", "~> 5.2"
+
+# S3
+gem "aws-sdk-s3", require: false
+
+# SimpleForm
+gem "simple_form", "~> 5.1"
+
+# Background Jobs
+gem "sidekiq", "~> 6.2", ">= 6.2.2"

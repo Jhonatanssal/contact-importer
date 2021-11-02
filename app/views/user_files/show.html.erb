@@ -1,0 +1,49 @@
+<div class="container pt-4 d-flex justify-content-center">
+  <div class="w-75">
+    <div class="card text-center shadow p-4">
+      <div class="card-body">
+        <h3 class="card-title"><%= @file.name.split('/').last %></h3>
+      </div>
+      <hr>
+      <div class="card-body">
+        <p>URL: <a href="<%= @file.url %>"><%= @file.name.split('/').last %></a></p>
+        <p>Status: <%= @file.aasm_state.capitalize %></a></p>
+      </div>
+    </div>
+
+    <div class="card text-center shadow mt-3 p-3">
+      <div class="card-body">
+        <h3 class="card-title">Imported Contacts</h3>
+      </div>
+      <hr>
+      <%= render partial: "contacts/contacts_table" %>
+    </div>
+
+    <div class="card text-center shadow mt-3 p-3">
+      <div class="card-body">
+        <h3 class="card-title">Rejected Contacts</h3>
+      </div>
+      <hr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Reasons</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @rejected_contacts.each do|c| %>
+            <tr>
+              <th scope="row"><%= c.id %></th>
+              <td><%= c.contact_name %></td>
+              <td><%= c.contact_email %></td>
+              <td><%= c.reasons %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

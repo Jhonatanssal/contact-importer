@@ -4,8 +4,9 @@ AllCops:
   Exclude:
     - 'bin/bundle'
     - 'bin/setup'
-    - 'config/environments/production.rb'
-    - 'config/initializers/'
+    - 'config/environments/**'
+    - 'config/initializers/**'
+    - 'db/migrate/**'
     - 'db/schema.rb'
 
 Style/Documentation:
