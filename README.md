@@ -1,10 +1,11 @@
-# Ruby on Rails ToDo App
+# Ruby on Rails Contact Importer
 
 ## Built With
 
 - Ruby v3.0.2
 - Rails 6.0.3.4
 - Rspec rails
+- Heroku
 
 ## Live Demo
 
