@@ -1,24 +1,72 @@
-# README
+# Ruby on Rails ToDo App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Built With
 
-Things you may want to cover:
+- Ruby v3.0.2
+- Rails 6.0.3.4
+- Rspec rails
 
-* Ruby version
+## Live Demo
 
-* System dependencies
+[Live demo](https://contact-importerr.herokuapp.com/)
 
-* Configuration
+### Prerequisites
 
-* Database creation
+- Ruby: 3.0.2
+- Rails: 6.1.4.1
+- Redis
 
-* Database initialization
+## Getting Started
 
-* How to run the test suite
+To get a local copy up and running follow these simple example steps:
 
-* Services (job queues, cache servers, search engines, etc.)
+- Go to https://github.com/jhonatanssal/contact-importer and clone the repo by copying and pasting this command on your terminal: <br>
+```
+git clone https://github.com/jhonatanssal/contact-importer.git
+```
 
-* Deployment instructions
+### Setup
 
-* ...
+Install gems with:
+
+```
+bundle install
+```
+
+
+
+### Usage
+
+Start server with:
+
+```
+rails server
+```
+
+Open `http://localhost:3000/` in your browser.
+
+### Run tests
+
+```
+    rpsec --format documentation
+```
+
+
+### Deployment
+
+Heroku
+
+## Authors
+
+👤 **Jhonatan Sarrazola**
+- Github: [@jssarrazolaa](https://github.com/jssarrazolaa)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/jhonatanssal/contact-importer/issues).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
