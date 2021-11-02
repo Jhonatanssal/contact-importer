@@ -21,8 +21,9 @@ class UserFilesController < ApplicationController
     @user_file = UserFile.new(url: aws.public_url, name: aws.key, user: current_user)
 
     if @user_file.save
+      @user_file.process!
       FilesUploaderJob.perform_later(file_params[:columns], parse_csv(file_params[:file]),
-                                     current_user.id, @user_file.id)
+                                     current_user.id, @user_file)
       redirect_to user_path(current_user), success: "File successfully uploaded"
     else
       flash.now[:notice] = "There was an error"

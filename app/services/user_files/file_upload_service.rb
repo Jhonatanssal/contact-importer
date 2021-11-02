@@ -4,10 +4,10 @@
 
 module UserFiles
   class FileUploadService
-    def initialize(columns, file, user_id, file_id)
+    def initialize(columns, file, user_id, user_file)
       @file = file
       @user_id = user_id
-      @file_id = file_id
+      @user_file = user_file
       @columns = columns
     end
 
@@ -36,7 +36,7 @@ module UserFiles
                                credit_card: row[@columns[:credit_card].to_i],
                                franchise: row[@columns[:franchise].to_i],
                                user_id: @user_id,
-                               user_file_id: @file_id)
+                               user_file_id: @user_file.id)
 
       contact_report(contact) unless contact.save
     end
@@ -49,6 +49,8 @@ module UserFiles
         user_id: contact.user_id,
         reasons: errors_refactor(contact.errors)
       )
+
+      @user_file.fail! unless @user_file.failed?
     end
 
     def errors_refactor(errors)
