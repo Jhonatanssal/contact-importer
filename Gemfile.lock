@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.2.0)
+      concurrent-ruby (~> 1.0)
     actioncable (6.1.4.1)
       actionpack (= 6.1.4.1)
       activesupport (= 6.1.4.1)
@@ -61,6 +63,22 @@ GEM
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
     ast (2.4.2)
+    aws-eventstream (1.2.0)
+    aws-partitions (1.522.0)
+    aws-sdk-core (3.121.5)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.520.1)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.50.0)
+      aws-sdk-core (~> 3, >= 3.121.2)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.104.0)
+      aws-sdk-core (~> 3, >= 3.121.2)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.4)
+    aws-sigv4 (1.4.0)
+      aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
     bindex (0.8.1)
     bootsnap (1.9.1)
@@ -69,6 +87,7 @@ GEM
     byebug (11.1.3)
     childprocess (4.1.0)
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.6)
     credit_card_validations (4.1.0)
       activemodel (>= 3, <= 6.2)
@@ -101,6 +120,7 @@ GEM
     iniparse (1.5.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
+    jmespath (1.4.0)
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -172,6 +192,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.5.1)
     regexp_parser (2.1.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -221,6 +242,13 @@ GEM
     semantic_range (3.0.0)
     shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
+    sidekiq (6.2.2)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     simplecov (0.21.2)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -264,6 +292,8 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  aasm (~> 5.2)
+  aws-sdk-s3
   bootsnap (>= 1.4.4)
   byebug
   credit_card_validations (~> 4.1)
@@ -284,6 +314,8 @@ DEPENDENCIES
   rubocop-rspec
   sass-rails (>= 6)
   shoulda-matchers (~> 5.0)
+  sidekiq (~> 6.2, >= 6.2.2)
+  simple_form (~> 5.1)
   simplecov
   spring
   turbolinks (~> 5)

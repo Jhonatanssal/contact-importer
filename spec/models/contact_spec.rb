@@ -5,6 +5,7 @@ require "rails_helper"
 RSpec.describe Contact, type: :model do
   describe "associations" do
     it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:user_file) }
   end
 
   describe "validations" do
@@ -13,8 +14,10 @@ RSpec.describe Contact, type: :model do
       it { is_expected.to validate_presence_of(:email) }
       it { is_expected.to validate_presence_of(:date_of_birth) }
       it { is_expected.to validate_presence_of(:credit_card) }
+      it { is_expected.to validate_presence_of(:franchise) }
       it { is_expected.to validate_presence_of(:address) }
       it { is_expected.to validate_presence_of(:user_id) }
+      it { is_expected.to validate_presence_of(:user_file_id) }
     end
 
     describe "uniqueness" do
@@ -44,6 +47,11 @@ RSpec.describe Contact, type: :model do
 
         it "has invalid credit card number" do
           contact.date_of_birth = "12345678910111"
+          expect(contact).not_to be_valid
+        end
+
+        it "has invalid franchise" do
+          contact.franchise = "visa"
           expect(contact).not_to be_valid
         end
       end

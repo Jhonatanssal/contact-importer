@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :contacts
+  has_many :user_files
 
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :username, presence: true

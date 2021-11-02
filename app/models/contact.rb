@@ -2,6 +2,7 @@
 
 class Contact < ApplicationRecord
   belongs_to :user
+  belongs_to :user_file
 
   validates :name, presence: true
   validates :name, format: { with: /\A[a-zA-Z0-9\-]+\z/, message: "must be alphanumeric or with '-'" }
@@ -13,10 +14,12 @@ class Contact < ApplicationRecord
   }
   validates :address, presence: true
   validates :credit_card, presence: true
+  validates :franchise, presence: true
   validates :email, presence: true
   validates :email, uniqueness: { scope: :user_id }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :user_id, presence: true
+  validates :user_file_id, presence: true
 
   validate :date_format
   validate :card_validation
@@ -45,12 +48,13 @@ class Contact < ApplicationRecord
     ymd_format
   end
 
-  def card_validation
-    detector = CreditCardValidations::Detector.new(credit_card)
+  def detector
+    CreditCardValidations::Detector.new(credit_card)
+  end
 
+  def card_validation
     return add_card_error unless detector.valid_luhn?
 
-    add_franchise(detector)
     true
   end
 
@@ -62,8 +66,16 @@ class Contact < ApplicationRecord
     errors.add(:credit_card, "please enter a valid card number.")
   end
 
-  def add_franchise(detector)
-    self.franchise = detector.brand
+  def franchise_validation(detector)
+    if detector.brand == "maestro"
+      add_franchise_error unless franchise == "mastercard"
+    else
+      add_franchise_error unless franchise == detector.brand
+    end
+  end
+
+  def add_franchise_error
+    errors.add(:franchise, "please enter check franchise.")
   end
 
   def encrypt_credit_card

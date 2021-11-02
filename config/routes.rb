@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :users, only: :show do
     resources :contacts, only: :show
+    resources :user_files, only: %i[new create show]
   end
 
   root "pages#home"
